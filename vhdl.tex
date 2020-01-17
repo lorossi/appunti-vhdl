@@ -6,9 +6,18 @@
 \usepackage{enumitem}
 \usepackage{ccicons}
 \usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{xcolor}
 
 \geometry{left = 2.5 cm, right = 2.5 cm, bottom = 2 cm, top = 2 cm}
 \setlength{\parindent}{0em}
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    citecolor={black},
+    urlcolor={black}
+}
+
 \pagestyle{plain}
 \pagenumbering{gobble}
 
@@ -35,7 +44,7 @@
 \newpage
 \pagenumbering{roman}
 
-\tableofcontents
+\tableofcontents[hidelinks]
 
 \newpage 
 
