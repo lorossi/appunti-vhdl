@@ -9,7 +9,7 @@
 \usepackage{hyperref}
 \usepackage{xcolor}
 
-\geometry{left = 2.5 cm, right = 2.5 cm, bottom = 2.5 cm, top = 2.5 cm}
+\geometry{left = 2 cm, right = 2 cm, bottom = 2 cm, top = 2.5 cm}
 \setlength{\parindent}{0em}
 \hypersetup{
     colorlinks,
@@ -40,16 +40,15 @@
 \centerline{Quest'opera è distribuita con Licenza Creative Commons Attribuzione}
 \centerline{Non commerciale 4.0 Internazionale \ccbynceu}
 \end{doublespacing}
-
 \newpage
+
+
 \pagenumbering{roman}
 
 \tableofcontents
-
-\newpage 
-
 \clearpage
 \pagenumbering{arabic}
+\newpage
 
 \section{Sintassi base}
 \subsection{Case sensitivity}
@@ -293,6 +292,7 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 	\end{itemize}
 \end{itemize}
 	\end{itemize}
+
 \newpage
 
 \section{Basic statements}
@@ -336,6 +336,9 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
         ...
     End ARCHITECTURE_NAME
 	      \end{verbatim}
+	      
+\newpage	      
+	      
 	\item Esempio di una \textit{architecture}
 	      \begin{verbatim}
     architecture or2_a of or2 is
@@ -471,7 +474,7 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 	      \begin{verbatim}
     object'attribute_name
 	      \end{verbatim}
-	\bigskip
+	\newpage
 	\item Esempi di \textit{attribute}
 	      \begin{verbatim}
     signal vect : std_logic_vector(4 to 16);
@@ -486,12 +489,13 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 \end{itemize}
 
 
-\newpage
+
 
 \subsection{Aggregate}
 \begin{itemize}
 	\item Definisce un vettore tramite composizione
 	\item A differenza della concatenazione, la lunghezza del vettore non è definita a priori
+	
 	\item Esempi di \textit{aggregate}
 	      \begin{verbatim}
     signal vect_1 : std_logic_vector(7 downto 0);
@@ -506,14 +510,14 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{When/Else}
 \begin{itemize}
-	\item Assegna il valore ad un \textit{signal} condizionatamente ad un altro \textit{signal}
+	\item Assegna il valore ad un \textit{signal} condizionatamente ad un altro \textit{signal,} \textbf{ma solo al di fuori di un process}
 	\item Tutte le possibili condizioni vanno esplicitate, usando la \textit{keyword else}
 	\item Non bisogna usare le virgole dopo gli else
 	\item Struttura di un \textit{when/else}
 	      \begin{verbatim}
-    SIGNAL_1 <= VALUE when SIGNAL_2 0 VALUE else
+    SIGNAL_1 <= VALUE when SIGNAL_2 = VALUE else
                 ...
-                else = VALUE;
+                else VALUE;
 	      \end{verbatim}
 	\item Esempio di \textit{when/else}
 	      \begin{verbatim}
@@ -531,7 +535,7 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{With/Select}
 \begin{itemize}
-	\item Assegna il valore ad un \textit{signal} condizionatamente ad un altro \textit{signal}
+	\item Assegna il valore ad un \textit{signal} condizionatamente ad un altro \textit{signal, } \textbf{ma solo al di fuori di un process}
 	\item Tutte le possibili condizioni vanno esplicitate, usando la \textit{keyword else}
 	\item Servono le virgole a fine riga
 	\item Struttura di un \textit{with/select}
@@ -553,8 +557,8 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 	      \end{verbatim}
 \end{itemize}
 
-\newpage
-\newpage 
+
+ \newpage
 
 \section{Generate statement}
 \begin{itemize}
@@ -597,7 +601,9 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
         STATEMENT
     end generate;
 	      \end{verbatim}
-	      \bigskip
+	      
+\newpage
+	      
 	\item Esempio di un \textit{For ... Generate}
 	      \begin{verbatim}
     architecture Behavioral of test is
@@ -612,6 +618,7 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
     end Behavioral;
 	      \end{verbatim}
 \end{itemize}
+
 \newpage
 
 \section{Process}
@@ -654,8 +661,9 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 	      \begin{verbatim}
     LABEL wait SENSITIVITY_CLAUSE CONDITION_CLAUSE;
 	      \end{verbatim}
-	      \bigskip
-	      \bigskip
+	      
+\newpage	      
+	      
 	\item Esempio di un \textit{wait statement}
 	      \begin{verbatim}
     wait for 10 ns;              -- Specifica un tempo di timeout
@@ -690,6 +698,7 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 \begin{itemize}
 	\item Nella regione di \textit{sequential statement} viene inserita tutta la descrizione del comportamento del \textit{process}
 	\item La lettura del codice avviene in maniera \textit{sequenziale}
+	
 	\newpage
 	
 	\item Esempio di \textit{sequential statement region}
@@ -752,6 +761,7 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 \end{itemize}
 \subsubsection{Case statement}
 \begin{itemize}
+	\item \'E necessario specificare \textbf{sempre} il caso \textit{Others}
 	\item Struttura dell'\textit{Case statement}
 	      \begin{verbatim}
     LABEL case EXPRESSION is
@@ -775,7 +785,9 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
     end case
 	      \end{verbatim}
 \end{itemize}
-\newpage
+
+\newpage 
+
 \subsubsection{Loop statement}
 \begin{itemize}
 	\item Struttura dell'\textit{Loop statement}
@@ -826,7 +838,7 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 	\item L'assegnazione delle \textit{variables} avviene con \(=:\)
 \end{itemize}
 
-\newpage 
+\newpage
 
 \section{Custom types}
 \begin{itemize}
