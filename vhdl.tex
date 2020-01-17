@@ -9,7 +9,7 @@
 \usepackage{hyperref}
 \usepackage{xcolor}
 
-\geometry{left = 2.5 cm, right = 2.5 cm, bottom = 2 cm, top = 2 cm}
+\geometry{left = 2.5 cm, right = 2.5 cm, bottom = 2.5 cm, top = 2.5 cm}
 \setlength{\parindent}{0em}
 \hypersetup{
     colorlinks,
@@ -44,7 +44,7 @@
 \newpage
 \pagenumbering{roman}
 
-\tableofcontents[hidelinks]
+\tableofcontents
 
 \newpage 
 
@@ -155,7 +155,6 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
 	      	\item Combinazione delle precedenti
 	      \end{itemize}
 \end{itemize}
-\newpage
 
 \section{Librerie}
 \begin{itemize}
@@ -168,9 +167,14 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
 	      	\item \textit{math\_real.all} mathematical operations
 	      \end{itemize}
 \end{itemize}
+
+\newpage
+
+\section{Tipi di dato}
+Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \textit{signal} e \textit{variables}
 \subsection{Integer}
 \begin{itemize}
-	\item Definito nella libreria \textit{standard}
+	\item Definito nella libreria \textit{std\_logic\_1164.all}
 	\item Contiene gli interi da \(-2^{31}-1\) a \(2^{31}-1\)
 	\item Non ci si può affidare al \textit{roll-up} o all'\textit{overflow}
 	\item Si può specificare la larghezza massima dell'intero. \textbf{Tuttavia in tal caso non ci si potrà affidare al \textit{roll-over.}} 
@@ -195,28 +199,53 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
 \end{itemize}
 \subsection{Std\_Ulogic}
 \begin{itemize}
+	\item Definito nella libreria \textit{std\_logic\_1164}
 	\item Definisce qualsiasi stato di un elemento ad 1 bit
 	      \begin{itemize}
-	      	\item U \textit{forcing uninitialized}
-	      	\item X \textit{forcing unknown}
-	      	\item 0 \textit{forcing 0}
-	      	\item 1 \textit{forcing 1}
-	      	\item Z \textit{high impedance}
-	      	\item W \textit{WEAK unknown}
-	      	\item L \textit{WEAK low}
-	      	\item H \textit{WEAL high}
-	      	\item - \textit{don't care}
+	      	\item 'U' \textit{forcing uninitialized}
+	      	\item 'X' \textit{forcing unknown}
+	      	\item '0' \textit{forcing 0}
+	      	\item '1' \textit{forcing 1}
+	      	\item 'Z' \textit{high impedance}
+	      	\item 'W' \textit{WEAK unknown}
+	      	\item 'L' \textit{WEAK low}
+	      	\item 'H' \textit{WEAL high}
+	      	\item '-' \textit{don't care}
 	      \end{itemize}
-	\item Per risolvere i conflitti si usa la libreria \textbf{std\_ulogic.all}
+\end{itemize}	
+     
+\subsection{Std\_Logic}
+\begin{itemize}
+	\item Definito nella libreria \textit{standard}
+	\item \`E un \textit{subtype} del tipo \textit{std\_ulogic}
+	\item Ovvia automaticamente al problema che sorge quando due signal diversi vengono connessi tra di loro (ad esempio, all'uscita di due buffer)
+	\item Il segnale viene automaticamente \textit{risolto} (assegnato) tramite una \textit{tabella di risoluzione}
 \end{itemize}
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{cccccccccc}
+\multicolumn{1}{l}{} & \multicolumn{9}{c}{Tabella di risoluzione}                                                                         \\
+                     & \textbf{U} & \textbf{X} & \textbf{0} & \textbf{1} & \textbf{Z} & \textbf{W} & \textbf{L} & \textbf{H} & \textbf{-} \\
+\textbf{U}           & U          & U          & U          & U          & U          & U          & U          & U          & U          \\
+\textbf{X}           & U          & X          & X          & X          & X          & X          & X          & X          & X          \\
+\textbf{0}           & U          & X          & 0          & X          & 0          & 0          & 0          & 0          & X          \\
+\textbf{1}           & U          & X          & X          & 1          & 1          & 1          & 1          & 1          & X          \\
+\textbf{Z}           & U          & X          & 0          & 1          & Z          & W          & L          & H          & X          \\
+\textbf{W}           & U          & X          & 0          & 1          & W          & W          & W          & W          & X          \\
+\textbf{L}           & U          & X          & 0          & 1          & L          & W          & L          & W          & X          \\
+\textbf{H}           & U          & X          & 0          & 1          & H          & W          & W          & H          & X          \\
+\textbf{-}           & U          & X          & X          & X          & X          & X          & X          & X          & X         
+\end{tabular}
+\end{table}
 
 \subsection{Std\_Logic\_Vector}
 \begin{itemize}
 	\item Estensione di \textit{std\_logic} sotto forma di vettore
 \end{itemize}
 \begin{verbatim}
-    STD_LOGIC_VECTOR(7 downto 0)
-    STD_LOGIC_VECTOR(0 to 7)
+    STD_LOGIC_VECTOR(15 downto 0)
+    STD_LOGIC_VECTOR(0 to 15)
 \end{verbatim}
 
 \subsection{Signed/Unsigned}
@@ -230,6 +259,40 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
     type UNSIGNED is ARRAY (NATURAL range <>) OF std_logic
     type SIGNED is ARRAY (NATURAL range <>) OF std_logic
 \end{verbatim}
+
+\newpage
+
+\subsection{Conversioni tra tipi di dato}
+\begin{itemize}
+	\item Categorizzazione dei tipi
+	\begin{itemize}
+		\item \textit{Integer} \(\rightarrow\) numero
+		\item \textit{Signed, Unsigned, Std\_logic\_vector} \(\rightarrow\) vettori di bit
+	\end{itemize}
+	\item Conversione dei tipi
+	\begin{itemize}
+	\item Da \textit{Integer} a:
+	\begin{itemize}
+		\item \textit{Signed} \(\rightarrow\) \textit{to\_signed(integer, signed'LENGHT)}
+		\item \textit{Unsigned} \(\rightarrow\) \textit{to\_unsigned(integer, unsigned'LENGHT)}
+	\end{itemize}
+	\item Da \textit{Signed} a:
+	\begin{itemize}
+		\item \textit{Integer} \(\rightarrow\) \textit{to\_integer(signed)}
+		\item \textit{Std\_logic\_vector} \(\rightarrow\) \textit{std\_logic\_vector(signed)}
+	\end{itemize}
+	\item Da \textit{Unsigned} a:
+	\begin{itemize}
+		\item \textit{Integer}\(\rightarrow\) \textit{to\_integer(unsigned)}
+		\item \textit{std\_logic\_vector}\(\rightarrow\) \textit{std\_logic\_vector(unsigned)}
+	\end{itemize}
+	\item Da \textit{Std\_logic\_vector} a:
+	\begin{itemize}
+		\item \textit{Signed}\(\rightarrow\) \textit{signed(std\_logic\_vector)}
+		\item \textit{Unsigned}\(\rightarrow\) \textit{unsigned(std\_logic\_vector)}
+	\end{itemize}
+\end{itemize}
+	\end{itemize}
 \newpage
 
 \section{Basic statements}
@@ -408,6 +471,7 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
 	      \begin{verbatim}
     object'attribute_name
 	      \end{verbatim}
+	\bigskip
 	\item Esempi di \textit{attribute}
 	      \begin{verbatim}
     signal vect : std_logic_vector(4 to 16);
@@ -533,6 +597,7 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
         STATEMENT
     end generate;
 	      \end{verbatim}
+	      \bigskip
 	\item Esempio di un \textit{For ... Generate}
 	      \begin{verbatim}
     architecture Behavioral of test is
@@ -547,6 +612,7 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
     end Behavioral;
 	      \end{verbatim}
 \end{itemize}
+\newpage
 
 \section{Process}
 \begin{itemize}
@@ -588,6 +654,8 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
 	      \begin{verbatim}
     LABEL wait SENSITIVITY_CLAUSE CONDITION_CLAUSE;
 	      \end{verbatim}
+	      \bigskip
+	      \bigskip
 	\item Esempio di un \textit{wait statement}
 	      \begin{verbatim}
     wait for 10 ns;              -- Specifica un tempo di timeout
@@ -622,6 +690,8 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
 \begin{itemize}
 	\item Nella regione di \textit{sequential statement} viene inserita tutta la descrizione del comportamento del \textit{process}
 	\item La lettura del codice avviene in maniera \textit{sequenziale}
+	\newpage
+	
 	\item Esempio di \textit{sequential statement region}
 		\begin{verbatim}
     process (...)
@@ -705,6 +775,7 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
     end case
 	      \end{verbatim}
 \end{itemize}
+\newpage
 \subsubsection{Loop statement}
 \begin{itemize}
 	\item Struttura dell'\textit{Loop statement}
@@ -754,6 +825,8 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 	\item Le \textit{variables} vengono aggiornate istantaneamente
 	\item L'assegnazione delle \textit{variables} avviene con \(=:\)
 \end{itemize}
+
+\newpage 
 
 \section{Custom types}
 \begin{itemize}
