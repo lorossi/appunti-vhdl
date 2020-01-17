@@ -7,7 +7,7 @@
 \usepackage{ccicons}
 \usepackage{setspace}
 
-\geometry{left = 2.5 cm, right = 2.5 cm, bottom = 2.5 cm, top = 2.5 cm}
+\geometry{left = 2.5 cm, right = 2.5 cm, bottom = 2 cm, top = 2 cm}
 \setlength{\parindent}{0em}
 \pagestyle{plain}
 \pagenumbering{gobble}
@@ -27,7 +27,7 @@
 \centerline{Email: lorenzo14.rossi@mail.polimi.it}
 \centerline{GitHub: https://github.com/lorossi/appunti-vhdl}
 
-\vspace{19em}
+\vspace{16em}
 \centerline{Quest'opera è distribuita con Licenza Creative Commons Attribuzione}
 \centerline{Non commerciale 4.0 Internazionale \ccbynceu}
 \end{doublespacing}
@@ -532,7 +532,7 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
             c(I) <= a(0);
         end generate;
         
-        LOOP_GEN_" : for I in 4 to 7 generate
+        LOOP_GEN_2 : for I in 4 to 7 generate
             c(I) <= a(1);
         end generate;
     end Behavioral;
@@ -605,7 +605,7 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
 	    process(clk, reset)
 	        variable local_count : count'base
 	    begin
-            ...
+        	...
 	    end process;
 	      \end{verbatim}
 \end{itemize}
@@ -631,7 +631,7 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
 \subsection{Sequential statements}
 \begin{itemize}
 	\item Questi \textit{statements} sono usati nei \textit{process}
-	\item Lista di \textit(statements)
+	\item Lista di \textit{statements}
 	      \begin{itemize}
 	      	\item wait statement
 	      	\item assertion statement
@@ -696,7 +696,7 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
     end case
 	      \end{verbatim}
 \end{itemize}
-a\subsubsection{Loop statement}
+\subsubsection{Loop statement}
 \begin{itemize}
 	\item Struttura dell'\textit{Loop statement}
 	      \begin{verbatim}
@@ -885,6 +885,7 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 	\item Esempi di \textit{constrained array}
 	\begin{verbatim}
 	    type MySimpleArray is array (0 to 10) of Another_type;
+	    
 	    type img_type is array (0 to 15, 0 to 15) of RGB_Type;
 	    subtype byte_type is std_logic_vector(7 downto 0);
 	\end{verbatim}
@@ -902,11 +903,14 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 	\item Esempi di \textit{unconstrained array}
 	\begin{verbatim}
 	    type my1DArray_type is array (integer range <>, integer range <>) 
-		    of std_logic_vector(7 downto 0);
+	        of std_logic_vector(7 downto 0);
+	        
 	    signal my1DArray : my1DArray_type(1 to 3);
 		
+		
 	    type my2DArray_type is array (integer range<>, integer range<>) 
-		    of std_logic_vector(7 downto 0);
+    	    of std_logic_vector(7 downto 0);
+    	    
 	    signal my2DArray : my2DArray_type(1 to 3, 5 downto 0);
 	\end{verbatim}
 \end{itemize}
