@@ -272,8 +272,8 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 	\begin{itemize}
 	\item Da \textit{Integer} a:
 	\begin{itemize}
-		\item \textit{Signed} \(\rightarrow\) \textit{to\_signed(integer, signed'LENGHT)}
-		\item \textit{Unsigned} \(\rightarrow\) \textit{to\_unsigned(integer, unsigned'LENGHT)}
+		\item \textit{Signed} \(\rightarrow\) \textit{to\_signed(integer, signed'LENGTH)}
+		\item \textit{Unsigned} \(\rightarrow\) \textit{to\_unsigned(integer, unsigned'LENGTH)}
 	\end{itemize}
 	\item Da \textit{Signed} a:
 	\begin{itemize}
@@ -433,10 +433,11 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{Generic}
 \begin{itemize}
-	\item I \textit{generic} servono a passare informatzioni all'\textit{entity}
-	\item Non possono essere modificati duranete l'esecuzione
+	\item I \textit{generic} servono a passare informazioni all'\textit{entity}
+	\item Non possono essere modificati durante l'esecuzione
 	\item Specificano parametri, ad esempio larghezza di vettori
 	\item Si usano per rendere scalabile un sistema
+	\item Possono essere considerate come \textit{costanti}
 	\item Struttura di un \textit{generic}
 	      \begin{verbatim}
     Generic(
