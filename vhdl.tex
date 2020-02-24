@@ -86,7 +86,12 @@ Il VHDL è \textit{case insensitive}, ovverosia non fa differenza tra lettere ma
 	\item xnor \textit{or esclusivo negato}
 \end{itemize}
 
+\newpage
+
 \subsubsection{Shift}
+
+\textbf{Le operazioni di \textit{shift} funzionano solo sugli \textit{std\_logic\_vector} nella versione di VHDL successiva alla 2008.} Per gli shift tra \textit{signed} o in versioni precedenti, consultare il paragrafo \ref{signedshift}
+
 \begin{itemize}
 	\item SLL \textit{Shift left, i bit più a destra sono rimpiazzati da zeri}
 	\item SRL \textit{Shift right, i bit più a sinistra sono rimpiazzati da zeri}
@@ -95,6 +100,32 @@ Il VHDL è \textit{case insensitive}, ovverosia non fa differenza tra lettere ma
 	\item ROL \textit{Rotate left}
 	\item ROR \textit{Rotate right}
 \end{itemize}
+
+\subsubsection{Shift tra signed} \label{signedshift}
+Per preservare il \textit{bit di segno} non sarà sufficiente usare le funzioni \textit{SLL} o \textit{SRL} ma bisognerà usare \textit{attributes} (paragrafo \ref{attributes}) e l'operazione di \textit{concatenazione} (paragrafo \ref{miscellanei})
+
+\begin{itemize}
+	\item \textit{SHIFT LEFT}
+		\begin{verbatim}
+		    signal_shifted <= signal(signal'HIGH) & signal(signal'HIGH - 1 downto 0) & '0'
+		\end{verbatim}
+	\item \textit{SHIFT RIGHT}
+		\begin{verbatim}
+		    signal_shifted <= signal(signal'HIGH) & signal(signal'HIGH downto 1)
+		\end{verbatim}
+\end{itemize}
+
+Alternativamente sarà possibile usare le funzioni \textit{built-in} definite nella \textit{numeric\_std} che accettano sia \textit{signed} che \textit{unsigned}:
+\begin{itemize}
+	\item shift\_left()
+	\item shift\_right()
+\end{itemize}
+
+Uso delle funzioni:
+\begin{verbatim}
+    DESTINATION_SIGNAL <= shift_left(SOURCE_SIGNAL, N OF BITS)
+    DESTINATION_SIGNAL <= shift_right(SOURCE_SIGNAL, N OF BITS)
+\end{verbatim}
 \subsubsection{Operatori relazionali}
 \begin{itemize}
 	\item \(=\) \textit{uguale}
@@ -120,7 +151,7 @@ Per incrementare di \(1\) una variabile non si può usare l'operatore \(++\) ma 
 	    SIGNAL <= SIGNAL + 1;
 \end{verbatim}
 E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmetici.
-\subsubsection{Operatori miscellanei}
+\subsubsection{Operatori miscellanei} \label{miscellanei}
 \begin{itemize}
 	\item \& \textit{operazione di concatenazione}
 	\item \(--\) \textit{commento in linea}
@@ -461,7 +492,7 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 	\item \textbf{Vanno usati nella \textit{entity} prima della funzione \textit{port}}
 \end{itemize}
 
-\subsection{Attributes}
+\subsection{Attributes} \label{attributes}
 \begin{itemize}
 	\item Permettono di ricavare informazioni su oggetti del nostro sistema
 	\item \textit{Attributes} più usati:
@@ -471,11 +502,13 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 	      	\item LENGTH
 	      	\item RANGE/REVERSE\_RANGE
 	      \end{itemize}
+	      
+\newpage
+
 	\item Struttura di un \textit{attribute}
 	      \begin{verbatim}
     object'attribute_name
 	      \end{verbatim}
-	\newpage
 	\item Esempi di \textit{attribute}
 	      \begin{verbatim}
     signal vect : std_logic_vector(4 to 16);
@@ -492,11 +525,11 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 
 
-\subsection{Aggregate}
+\subsection{Aggregate} \label{aggregates}
 \begin{itemize}
 	\item Definisce un vettore tramite composizione
 	\item A differenza della concatenazione, la lunghezza del vettore non è definita a priori
-	
+
 	\item Esempi di \textit{aggregate}
 	      \begin{verbatim}
     signal vect_1 : std_logic_vector(7 downto 0);
@@ -520,6 +553,9 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
                 ...
                 else VALUE;
 	      \end{verbatim}
+	      
+\newpage	      
+	      
 	\item Esempio di \textit{when/else}
 	      \begin{verbatim}
     a, b signals
