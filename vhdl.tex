@@ -107,7 +107,7 @@ Per preservare il \textit{bit di segno} non sarà sufficiente usare le funzioni 
 \begin{itemize}
 	\item \textit{SHIFT LEFT}
 		\begin{verbatim}
-		    signal_shifted <= signal(signal'HIGH) & signal(signal'HIGH - 1 downto 0) & '0'
+		    signal_shifted <= signal(signal'HIGH) & signal(signal'HIGH - 2 downto 0) & '0'
 		\end{verbatim}
 	\item \textit{SHIFT RIGHT}
 		\begin{verbatim}
