@@ -1,4 +1,4 @@
-# appunti-vhdl
+# Appunti VHDL
 Appunti di VHDL
 
 Una collezione di appunti di VHDL riguardanti sintassi, tipi di dato, strutture logiche ed operatori.
