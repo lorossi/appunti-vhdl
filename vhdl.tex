@@ -33,12 +33,12 @@
 
 \large
 \begin{doublespacing}
-\centerline{Email: lorenzo14.rossi@mail.polimi.it}
-\centerline{GitHub: https://github.com/lorossi/appunti-vhdl}
+  \centerline{Email: lorenzo14.rossi@mail.polimi.it}
+  \centerline{GitHub: https://github.com/lorossi/appunti-vhdl}
 
-\vspace{16em}
-\centerline{Quest'opera è distribuita con Licenza Creative Commons Attribuzione}
-\centerline{Non commerciale 4.0 Internazionale \ccbynceu}
+  \vspace{16em}
+  \centerline{Quest'opera è distribuita con Licenza Creative Commons Attribuzione}
+  \centerline{Non commerciale 4.0 Internazionale \ccbynceu}
 \end{doublespacing}
 \newpage
 
@@ -63,7 +63,7 @@ Il VHDL è \textit{case insensitive}, ovverosia non fa differenza tra lettere ma
 	    VARIABLE NAME := EXPRESSION;
 \end{verbatim}
 \subsubsection{Slicing di vettori}
-\textit{SIGNAL\_0} e \textit{SIGNAL\_1} sono segnali di tipo \textit{std\_logic\_vector}
+\texttt{SIGNAL\_0} e \texttt{SIGNAL\_1} sono segnali di tipo \textit{std\_logic\_vector}
 \begin{verbatim}
 	    SIGNAL_1 <= SIGNAL_0(RANGE);
 	    SIGNAL_1 <= SIGNAL_0(N downto M);
@@ -77,13 +77,13 @@ Il VHDL è \textit{case insensitive}, ovverosia non fa differenza tra lettere ma
 
 \subsubsection{Operatori logici}
 \begin{itemize}
-	\item not \textit{operazione di negazione}
-	\item and \textit{operazione di moltiplicazione logica}
-	\item or \textit{operazione di addizione logica}
-	\item nor \textit{operazione di somma negata}
-	\item nand \textit{operazione di moltiplicazione negata}
-	\item xor \textit{or esclusivo}
-	\item xnor \textit{or esclusivo negato}
+  \item \texttt{not} \textit{operazione di negazione}
+  \item \texttt{and} \textit{operazione di moltiplicazione logica}
+  \item \texttt{or} \textit{operazione di addizione logica}
+  \item \texttt{nor} \textit{operazione di somma negata}
+  \item \texttt{nand} \textit{operazione di moltiplicazione negata}
+  \item \texttt{xor} \textit{or esclusivo}
+  \item \texttt{xnor} \textit{or esclusivo negato}
 \end{itemize}
 
 \newpage
@@ -93,32 +93,32 @@ Il VHDL è \textit{case insensitive}, ovverosia non fa differenza tra lettere ma
 \textbf{Le operazioni di \textit{shift} funzionano solo sugli \textit{std\_logic\_vector} nella versione di VHDL successiva alla 2008.} Per gli shift tra \textit{signed} o in versioni precedenti, consultare il paragrafo \ref{signedshift}
 
 \begin{itemize}
-	\item SLL \textit{Shift left, i bit più a destra sono rimpiazzati da zeri}
-	\item SRL \textit{Shift right, i bit più a sinistra sono rimpiazzati da zeri}
-	\item SLA \textit{Shift left aritmetico}
-	\item SRA \textit{Shift right aritmetico}
-	\item ROL \textit{Rotate left}
-	\item ROR \textit{Rotate right}
+  \item \texttt{SLL} \textit{Shift left, i bit più a destra sono rimpiazzati da zeri}
+  \item \texttt{SRL} \textit{Shift right, i bit più a sinistra sono rimpiazzati da zeri}
+  \item \texttt{SLA} \textit{Shift left aritmetico}
+  \item \texttt{SRA} \textit{Shift right aritmetico}
+  \item \texttt{ROL} \textit{Rotate left}
+  \item \texttt{ROR} \textit{Rotate right}
 \end{itemize}
 
 \subsubsection{Shift tra signed} \label{signedshift}
 Per preservare il \textit{bit di segno} non sarà sufficiente usare le funzioni \textit{SLL} o \textit{SRL} ma bisognerà usare \textit{attributes} (paragrafo \ref{attributes}) e l'operazione di \textit{concatenazione} (paragrafo \ref{miscellanei})
 
 \begin{itemize}
-	\item \textit{SHIFT LEFT}
-		\begin{verbatim}
+  \item \texttt{SHIFT LEFT}
+        \begin{verbatim}
 		    signal_shifted <= signal(signal'HIGH) & signal(signal'HIGH - 2 downto 0) & '0'
 		\end{verbatim}
-	\item \textit{SHIFT RIGHT}
-		\begin{verbatim}
+  \item \texttt{SHIFT RIGHT}
+        \begin{verbatim}
 		    signal_shifted <= signal(signal'HIGH) & signal(signal'HIGH downto 1)
 		\end{verbatim}
 \end{itemize}
 
 Alternativamente sarà possibile usare le funzioni \textit{built-in} definite nella \textit{numeric\_std} che accettano sia \textit{signed} che \textit{unsigned}:
 \begin{itemize}
-	\item shift\_left()
-	\item shift\_right()
+  \item \texttt{shift\_left()}
+  \item \texttt{shift\_right()}
 \end{itemize}
 
 Uso delle funzioni:
@@ -128,74 +128,74 @@ Uso delle funzioni:
 \end{verbatim}
 \subsubsection{Operatori relazionali}
 \begin{itemize}
-	\item \(=\) \textit{uguale}
-	\item \(/=\) \textit{non uguale, diverso}
-	\item \(<\) \textit{minore}
-	\item \(>\) \textit{maggiore}
-	\item \(<=\) \textit{minore uguale}
-	\item \(>=\) \textit{maggiore uguale}
+  \item \texttt{=} \textit{uguale}
+  \item \texttt{/=} \textit{non uguale, diverso}
+  \item \texttt{<} \textit{minore}
+  \item \texttt{>} \textit{maggiore}
+  \item \texttt{<=} \textit{minore uguale}
+  \item \texttt{>=} \textit{maggiore uguale}
 \end{itemize}
 \subsubsection{Operatori aritmetici}
 \begin{itemize}
-	\item \(**\) \textit{elevazione a potenza}
-	\item rem \textit{resto}
-	\item mod \textit{modulo}
-	\item \(/\) \textit{divisione}
-	\item \(*\) \textit{moltiplicazione}
-	\item \(+\) \textit{somma}
-	\item abs \textit{valore assoluto}
-	      	
+  \item \texttt{**} \textit{elevazione a potenza}
+  \item \texttt{rem} \textit{resto}
+  \item \texttt{mod} \textit{modulo}
+  \item \texttt{/} \textit{divisione}
+  \item \texttt{*} \textit{moltiplicazione}
+  \item \texttt{+} \textit{somma}
+  \item \texttt{abs} \textit{valore assoluto}
+
 \end{itemize}
-Per incrementare di \(1\) una variabile non si può usare l'operatore \(++\) ma bisogna usare l'espressione
+Per incrementare di \(1\) una variabile non si è possibile usare l'operatore \texttt{++} ma bisogna usare l'espressione
 \begin{verbatim}
 	    SIGNAL <= SIGNAL + 1;
 \end{verbatim}
 E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmetici.
 \subsubsection{Operatori miscellanei} \label{miscellanei}
 \begin{itemize}
-	\item \& \textit{operazione di concatenazione}
-	\item \(--\) \textit{commento in linea}
-	\item Others \textit{si riferisce a tutti gli elementi di un signal che non sono già stati menzionati}
-	\item array(i) \textit{accesso all'i-esimo elemento dell'array}
-	\item array(i, j) \textit{accesso al j-esimo elemento dell'i-esimo elemento dell'array - nested 2D array}
-	\item array := (Others \( => \) (Others \( => \) '0')) \textit{inizializzazione di un nested 1D array}
+  \item \texttt{\&} \textit{operazione di concatenazione}
+  \item \texttt{--} \textit{commento in linea}
+  \item \texttt{Others} \textit{si riferisce a tutti gli elementi di un signal che non sono già stati menzionati}
+  \item \texttt{array(i)} \textit{accesso all'i-esimo elemento dell'array}
+  \item \texttt{array(i, j)} \textit{accesso al j-esimo elemento dell'i-esimo elemento dell'array - nested 2D array}
+  \item \texttt{array := (Others  =>  (Others  =>  '0'))} \textit{inizializzazione di un nested 1D array}
 \end{itemize}
-	
+
 \newpage
 
-\section{Modeling Styles}
+\section{Modelling Styles}
 \begin{itemize}
-	\item Structural modeling
-	      \begin{itemize}
-	      	\item Implementazione come unione di porte/strutture
-	      	\item Technology dependent
-	      \end{itemize}
-	\item Dataflow Modeling
-	      \begin{itemize}
-	      	\item Implementazione come descrizione combinatoria tramite porte logiche di base
-	      	\item Technology independent
-	      \end{itemize}
-	\item Behavioral modeling
-	      \begin{itemize}
-	      	\item Implementazione come descrizione del comportamento che ha l'entity
-	      	\item Non riflette direttamente l'implementazione
-	      \end{itemize}
-	\item Mixed Modeling
-	      \begin{itemize}
-	      	\item Combinazione delle precedenti
-	      \end{itemize}
+  \item Structural modelling
+        \begin{itemize}
+          \item Implementazione come unione di porte/strutture
+          \item Technology dependent
+        \end{itemize}
+  \item Dataflow Modelling
+        \begin{itemize}
+          \item Implementazione come descrizione combinatoria tramite porte logiche di base
+          \item Technology independent
+        \end{itemize}
+  \item Behavioural modelling
+        \begin{itemize}
+          \item Implementazione come descrizione del comportamento che ha l'entity
+          \item Non riflette direttamente l'implementazione
+        \end{itemize}
+  \item Mixed Modelling
+        \begin{itemize}
+          \item Combinazione delle precedenti
+        \end{itemize}
 \end{itemize}
 
 \section{Librerie}
 \begin{itemize}
-	\item Definiscono i tipi base o il comportamento delle funzioni elementari
-	\item Tutte le librerie devono essere dichiarate manualmente, tranne la libreria \textit{standard} che contiene informazione base e direttive date all'analizzatore (es. \textit{boolean})
-	\item Librerie fondamentali:
-	      \begin{itemize}
-	      	\item \textit{std\_logic\_1164.all} enhanced signal types
-	      	\item \textit{numeric\_std.all} numerical computation
-	      	\item \textit{math\_real.all} mathematical operations
-	      \end{itemize}
+  \item Definiscono i tipi base o il comportamento delle funzioni elementari
+  \item Tutte le librerie devono essere dichiarate manualmente, tranne la libreria \textit{standard} che contiene informazione base e direttive date all'analizzatore (es. \textit{boolean})
+  \item Librerie fondamentali:
+        \begin{itemize}
+          \item \textit{std\_logic\_1164.all} enhanced signal types
+          \item \textit{numeric\_std.all} numerical computation
+          \item \textit{math\_real.all} mathematical operations
+        \end{itemize}
 \end{itemize}
 
 \newpage
@@ -204,74 +204,77 @@ E analogamente bisognerà comportarsi con sottrazione e altri operatori aritmeti
 Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \textit{signal} e \textit{variables}
 \subsection{Integer}
 \begin{itemize}
-	\item Definito nella libreria \textit{std\_logic\_1164.all}
-	\item Contiene gli interi da \(-2^{31}-1\) a \(2^{31}-1\)
-	\item Non ci si può affidare al \textit{roll-up} o all'\textit{overflow}
-	\item Si può specificare la larghezza massima dell'intero. \textbf{Tuttavia in tal caso non ci si potrà affidare al \textit{roll-over.}} 
+  \item Definito nella libreria \textit{std\_logic\_1164.all}
+  \item Contiene gli interi da \(-2^{31}-1\) a \(2^{31}-1\)
+  \item Non ci si può affidare al \textit{roll-up} o all'\textit{overflow}
+  \item Si può specificare la larghezza massima dell'intero. \textbf{Tuttavia in tal caso non ci si potrà affidare al \textit{roll-over.}}
 \end{itemize}
 \begin{verbatim}
         my_num INTEGER range 0 to 64
 \end{verbatim}
 \subsection{Natural e Positive}
 \begin{itemize}
-	\item \`Sono \textit{subtype} di \textit{INTEGER}
-	\item Non sono di 32 bit
-	\begin{itemize}
-		\item Il \textit{natural} contiene gli interi da \(0\) a \(2^{31}-1\)
-\begin{verbatim}
+  \item \`Sono \textit{subtype} di \textit{INTEGER}
+  \item Non sono di 32 bit
+        \begin{itemize}
+          \item Il \textit{natural} contiene gli interi da \(0\) a \(2^{31}-1\)
+                \begin{verbatim}
     subtype NATURAL is INTEGER range 0 to INTEGER'HIGH
  \end{verbatim}
-		\item Il \textit{positive} contiene gli interi da \(1\) a \(2^{31}-1\)
-\begin{verbatim}
+          \item Il \textit{positive} contiene gli interi da \(1\) a \(2^{31}-1\)
+                \begin{verbatim}
     subtype POSITIVE is INTEGER range 1 to INTEGER'HIGH
  \end{verbatim}
-	\end{itemize}	
+        \end{itemize}
 \end{itemize}
 \subsection{Std\_Ulogic}
 \begin{itemize}
-	\item Definito nella libreria \textit{std\_logic\_1164}
-	\item Definisce qualsiasi stato di un elemento ad 1 bit
-	      \begin{itemize}
-	      	\item 'U' \textit{forcing uninitialized}
-	      	\item 'X' \textit{forcing unknown}
-	      	\item '0' \textit{forcing 0}
-	      	\item '1' \textit{forcing 1}
-	      	\item 'Z' \textit{high impedance}
-	      	\item 'W' \textit{WEAK unknown}
-	      	\item 'L' \textit{WEAK low}
-	      	\item 'H' \textit{WEAL high}
-	      	\item '-' \textit{don't care}
-	      \end{itemize}
-\end{itemize}	
-     
-\subsection{Std\_Logic}
-\begin{itemize}
-	\item Definito nella libreria \textit{standard}
-	\item \`E un \textit{subtype} del tipo \textit{std\_ulogic}
-	\item Ovvia automaticamente al problema che sorge quando due signal diversi vengono connessi tra di loro (ad esempio, all'uscita di due buffer)
-	\item Il segnale viene automaticamente \textit{risolto} (assegnato) tramite una \textit{tabella di risoluzione}
+  \item Definito nella libreria \textit{std\_logic\_1164}
+  \item Definisce qualsiasi stato di un elemento ad 1 bit
+        \begin{itemize}
+          \item \texttt{U} \textit{forcing uninitialized}
+          \item \texttt{X} \textit{forcing unknown}
+          \item \texttt{0} \textit{forcing 0}
+          \item \texttt{1} \textit{forcing 1}
+          \item \texttt{Z} \textit{high impedance}
+          \item \texttt{W} \textit{WEAK unknown}
+          \item \texttt{L} \textit{WEAK low}
+          \item \texttt{H} \textit{WEAL high}
+          \item \texttt{-} \textit{don't care}
+        \end{itemize}
 \end{itemize}
 
-\begin{table}[htb]
-\centering
-\begin{tabular}{cccccccccc}
-\multicolumn{1}{l}{} & \multicolumn{9}{c}{Tabella di risoluzione}                                                                         \\
-                     & \textbf{U} & \textbf{X} & \textbf{0} & \textbf{1} & \textbf{Z} & \textbf{W} & \textbf{L} & \textbf{H} & \textbf{-} \\
-\textbf{U}           & U          & U          & U          & U          & U          & U          & U          & U          & U          \\
-\textbf{X}           & U          & X          & X          & X          & X          & X          & X          & X          & X          \\
-\textbf{0}           & U          & X          & 0          & X          & 0          & 0          & 0          & 0          & X          \\
-\textbf{1}           & U          & X          & X          & 1          & 1          & 1          & 1          & 1          & X          \\
-\textbf{Z}           & U          & X          & 0          & 1          & Z          & W          & L          & H          & X          \\
-\textbf{W}           & U          & X          & 0          & 1          & W          & W          & W          & W          & X          \\
-\textbf{L}           & U          & X          & 0          & 1          & L          & W          & L          & W          & X          \\
-\textbf{H}           & U          & X          & 0          & 1          & H          & W          & W          & H          & X          \\
-\textbf{-}           & U          & X          & X          & X          & X          & X          & X          & X          & X         
-\end{tabular}
+\subsection{Std Logic}
+\begin{itemize}
+  \item Definito nella libreria \textit{standard}
+  \item \`E un \textit{subtype} del tipo \textit{std\_ulogic}
+  \item Ovvia automaticamente al problema che sorge quando due signal diversi vengono connessi tra di loro (ad esempio, all'uscita di due buffer)
+  \item Il segnale viene automaticamente \textit{risolto} (assegnato) tramite una \textit{tabella di risoluzione} (Tabella~\ref{tab:tabella-risoluzione-std-logic})
+\end{itemize}
+
+\begin{table}[htbp]
+  \bigskip
+  \centering
+  \begin{tabular}{cccccccccc}                                                                                                                                                                                                              \\
+                        & \textbf{\texttt{U}} & \textbf{\texttt{X}} & \textbf{\texttt{0}} & \textbf{\texttt{1}} & \textbf{\texttt{Z}} & \textbf{\texttt{W}} & \textbf{\texttt{L}} & \textbf{\texttt{H}} & \textbf{\texttt{-}} \\
+    \textbf{\texttt{U}} & \texttt{U}          & \texttt{U}          & \texttt{U}          & \texttt{U}          & \texttt{U}          & \texttt{U}          & \texttt{U}          & \texttt{U}          & \texttt{U}          \\
+    \textbf{\texttt{X}} & \texttt{U}          & \texttt{X}          & \texttt{X}          & \texttt{X}          & \texttt{X}          & \texttt{X}          & \texttt{X}          & \texttt{X}          & \texttt{X}          \\
+    \textbf{\texttt{0}} & \texttt{U}          & \texttt{X}          & \texttt{0}          & \texttt{X}          & \texttt{0}          & \texttt{0}          & \texttt{0}          & \texttt{0}          & \texttt{X}          \\
+    \textbf{\texttt{1}} & \texttt{U}          & \texttt{X}          & \texttt{X}          & \texttt{1}          & \texttt{1}          & \texttt{1}          & \texttt{1}          & \texttt{1}          & \texttt{X}          \\
+    \textbf{\texttt{Z}} & \texttt{U}          & \texttt{X}          & \texttt{0}          & \texttt{1}          & \texttt{Z}          & \texttt{W}          & \texttt{L}          & \texttt{H}          & \texttt{X}          \\
+    \textbf{\texttt{W}} & \texttt{U}          & \texttt{X}          & \texttt{0}          & \texttt{1}          & \texttt{W}          & \texttt{W}          & \texttt{W}          & \texttt{W}          & \texttt{X}          \\
+    \textbf{\texttt{L}} & \texttt{U}          & \texttt{X}          & \texttt{0}          & \texttt{1}          & \texttt{L}          & \texttt{W}          & \texttt{L}          & \texttt{W}          & \texttt{X}          \\
+    \textbf{\texttt{H}} & \texttt{U}          & \texttt{X}          & \texttt{0}          & \texttt{1}          & \texttt{H}          & \texttt{W}          & \texttt{W}          & \texttt{H}          & \texttt{X}          \\
+    \textbf{\texttt{-}} & \texttt{U}          & \texttt{X}          & \texttt{X}          & \texttt{X}          & \texttt{X}          & \texttt{X}          & \texttt{X}          & \texttt{X}          & \texttt{X}
+  \end{tabular}
+  \caption{Tabella di risoluzione della libreria \textit{STD logic}}
+  \label{tab:tabella-risoluzione-std-logic}
+  \bigskip
 \end{table}
 
 \subsection{Std\_Logic\_Vector}
 \begin{itemize}
-	\item Estensione di \textit{std\_logic} sotto forma di vettore
+  \item Estensione di \textit{std\_logic} sotto forma di vettore
 \end{itemize}
 \begin{verbatim}
     STD_LOGIC_VECTOR(15 downto 0)
@@ -280,10 +283,10 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{Signed/Unsigned}
 \begin{itemize} \item Definiti nella libreria \textit{numeric\_std}
-	\item Array di \textit{signed} or \textit{unsigned} con tutte le loro operazioni definite
-	\item Non c'è limite alla dimensione che possono assumere
-	\item Si può fare affidamento al \textit{roll-up} o all'\textit{overflow}
-	\item C'è controllo sulla rappresentazione numerica
+  \item Array di \textit{signed} or \textit{unsigned} con tutte le loro operazioni definite
+  \item Non c'è limite alla dimensione che possono assumere
+  \item Si può fare affidamento al \textit{roll-up} o all'\textit{overflow}
+  \item C'è controllo sulla rappresentazione numerica
 \end{itemize}
 \begin{verbatim}
     type UNSIGNED is ARRAY (NATURAL range <>) OF std_logic
@@ -294,46 +297,46 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{Conversioni tra tipi di dato}
 \begin{itemize}
-	\item Categorizzazione dei tipi
-	\begin{itemize}
-		\item \textit{Integer} \(\rightarrow\) numero
-		\item \textit{Signed, Unsigned, Std\_logic\_vector} \(\rightarrow\) vettori di bit
-	\end{itemize}
-	\item Conversione dei tipi
-	\begin{itemize}
-	\item Da \textit{Integer} a:
-	\begin{itemize}
-		\item \textit{Signed} \(\rightarrow\) \textit{to\_signed(integer, signed'LENGTH)}
-		\item \textit{Unsigned} \(\rightarrow\) \textit{to\_unsigned(integer, unsigned'LENGTH)}
-	\end{itemize}
-	\item Da \textit{Signed} a:
-	\begin{itemize}
-		\item \textit{Integer} \(\rightarrow\) \textit{to\_integer(signed)}
-		\item \textit{Std\_logic\_vector} \(\rightarrow\) \textit{std\_logic\_vector(signed)}
-	\end{itemize}
-	\item Da \textit{Unsigned} a:
-	\begin{itemize}
-		\item \textit{Integer}\(\rightarrow\) \textit{to\_integer(unsigned)}
-		\item \textit{std\_logic\_vector}\(\rightarrow\) \textit{std\_logic\_vector(unsigned)}
-	\end{itemize}
-	\item Da \textit{Std\_logic\_vector} a:
-	\begin{itemize}
-		\item \textit{Signed}\(\rightarrow\) \textit{signed(std\_logic\_vector)}
-		\item \textit{Unsigned}\(\rightarrow\) \textit{unsigned(std\_logic\_vector)}
-	\end{itemize}
+  \item Categorizzazione dei tipi
+        \begin{itemize}
+          \item \textit{Integer} \(\rightarrow\) numero
+          \item \textit{Signed, Unsigned, Std\_logic\_vector} \(\rightarrow\) vettori di bit
+        \end{itemize}
+  \item Conversione dei tipi
+        \begin{itemize}
+          \item Da \textit{Integer} a:
+                \begin{itemize}
+                  \item \textit{Signed} \(\rightarrow\) \texttt{to\_signed(integer, signed'LENGTH)}
+                  \item \textit{Unsigned} \(\rightarrow\) \texttt{to\_unsigned(integer, unsigned'LENGTH)}
+                \end{itemize}
+          \item Da \textit{Signed} a:
+                \begin{itemize}
+                  \item \textit{Integer} \(\rightarrow\) \texttt{to\_integer(signed)}
+                  \item \textit{Std\_logic\_vector} \(\rightarrow\) \texttt{std\_logic\_vector(signed)}
+                \end{itemize}
+          \item Da \textit{Unsigned} a:
+                \begin{itemize}
+                  \item \textit{Integer}\(\rightarrow\) \texttt{to\_integer(unsigned)}
+                  \item \textit{std\_logic\_vector}\(\rightarrow\) \texttt{std\_logic\_vector(unsigned)}
+                \end{itemize}
+          \item Da \textit{Std\_logic\_vector} a:
+                \begin{itemize}
+                  \item \textit{Signed}\(\rightarrow\) \texttt{signed(std\_logic\_vector)}
+                  \item \textit{Unsigned}\(\rightarrow\) \texttt{unsigned(std\_logic\_vector)}
+                \end{itemize}
+        \end{itemize}
 \end{itemize}
-	\end{itemize}
 
 \newpage
 
 \section{Basic statements}
 \subsection{Entity}
 \begin{itemize}
-	\item Una \textit{entity} è la descrizione dell'interfaccia tra il design e l'ambiente esterno
-	\item Può indicare le \textit{declarations} e gli \textit{statements} che sono parte del design
-	\item Una \textit{entity} può essere condivisa tra più elementi del \textit{design}, ognuno con la sua differente architettura
-	\item Struttura di una \textit{entity}
-	      \begin{verbatim}
+  \item Una \textit{entity} è la descrizione dell'interfaccia tra il design e l'ambiente esterno
+  \item Può indicare le \textit{declarations} e gli \textit{statements} che sono parte del design
+  \item Una \textit{entity} può essere condivisa tra più elementi del \textit{design}, ognuno con la sua differente architettura
+  \item Struttura di una \textit{entity}
+        \begin{verbatim}
     entity ENTITY_NAME is
         port (
             PORT_NAME : PORT_MODE PORT_TYPE;
@@ -342,9 +345,9 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
         );
     end ENTITY_NAME;
 	      \end{verbatim}
-	\item \textbf{Non ci vuole il \textit{punto e virgola} nella dichiarazione dell'ultima porta}
-	\item Esempio di una \textit{entity}
-	      \begin{verbatim}
+  \item \textbf{Non ci vuole il \textit{punto e virgola} nella dichiarazione dell'ultima porta}
+  \item Esempio di una \textit{entity}
+        \begin{verbatim}
     entity or2 is
         port (
             a : in std_logic;
@@ -353,25 +356,25 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
         );
     end or;
 	      \end{verbatim}
-	\item \textbf{Si dichiarano prima della \textit{architecture}}
+  \item \textbf{Si dichiarano prima della \textit{architecture}}
 \end{itemize}
 
 \subsection{Architecture}
 \begin{itemize}
-	\item Dentro la \textit{architecture} viene descritto il comportamento di uno o più componenti istanziati
-	\item Si possono usare più \textit{architecture} per \textit{entity}, scritte in forme diverse, per poi scegliere l'implementazione che si desidera
-	\item Struttura di una \textit{architecture}
-	      \begin{verbatim}
+  \item Dentro la \textit{architecture} viene descritto il comportamento di uno o più componenti istanziati
+  \item Si possono usare più \textit{architecture} per \textit{entity}, scritte in forme diverse, per poi scegliere l'implementazione che si desidera
+  \item Struttura di una \textit{architecture}
+        \begin{verbatim}
     architecture ARCHITECTURE_NAME of ENTITY_NAME is
     Begin
         ...
     End ARCHITECTURE_NAME
 	      \end{verbatim}
-	      
-\newpage	      
-	      
-	\item Esempio di una \textit{architecture}
-	      \begin{verbatim}
+
+        \newpage
+
+  \item Esempio di una \textit{architecture}
+        \begin{verbatim}
     architecture or2_a of or2 is
     Begin
         c <= a or b;
@@ -381,47 +384,47 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{Modes}
 \begin{itemize}
-	\item Il modo di una porta definisce la direzione dei segnali che la attraversano
-	\item Tipi di modi:
-	      \begin{itemize}
-	      	\item IN \textit{ingresso, può solo essere letta}
-	      	\item OUT \textit{uscita, può solo essere scritta}
-	      	\item INOUT \textit{sia ingresso che uscita}
-	      	\item BUFFER \textit{porta di uscita che può essere usata anche per leggere il valore scritto in precedenza}
-	      	\item LINKAGE \textit{porta speciale, crea collegamento diretto senza buffer}
-	      \end{itemize}
+  \item Il modo di una porta definisce la direzione dei segnali che la attraversano
+  \item Tipi di modi:
+        \begin{itemize}
+          \item \texttt{IN} \textit{ingresso, può solo essere letta}
+          \item \texttt{OUT} \textit{uscita, può solo essere scritta}
+          \item \texttt{INOUT} \textit{sia ingresso che uscita}
+          \item \texttt{BUFFER} \textit{porta di uscita che può essere usata anche per leggere il valore scritto in precedenza}
+          \item \texttt{LINKAGE} \textit{porta speciale, crea collegamento diretto senza buffer}
+        \end{itemize}
 \end{itemize}
 
 \subsection{Signal}
 \begin{itemize}
-	\item Oggetti primari per la creazione di un sistema hardware
-	\item Ad ogni segnale è associato un nome, un tipo ed un valore iniziale \textit{(facoltativamente)}
-	      \begin{itemize}
-	      	\item Un segnale non inizializzato avrà valore indefinito \textit{U}
-	      \end{itemize}
-	\item Possono essere utilizzati per memorizzare valori o per connettere entità
-	\item Struttura di un \textit{signal}
-	      \begin{verbatim}
+  \item Oggetti primari per la creazione di un sistema hardware
+  \item Ad ogni segnale è associato un nome, un tipo ed un valore iniziale \textit{(facoltativamente)}
+        \begin{itemize}
+          \item Un segnale non inizializzato avrà valore indefinito \textit{U}
+        \end{itemize}
+  \item Possono essere utilizzati per memorizzare valori o per connettere entità
+  \item Struttura di un \textit{signal}
+        \begin{verbatim}
     signal SIGNAL_NAME : SIGNAL_TYPE := INITIAL_VALUE;
     signal SIGNAL_NAME : SIGNAL_TYPE;
 	      \end{verbatim}
-	\item Esempio di un \textit{signal}
-	      \begin{verbatim}
+  \item Esempio di un \textit{signal}
+        \begin{verbatim}
     signal s1 : std_logic := '1';
     signal s2 : std_logic;
 	      \end{verbatim}
-	\item \textbf{Il \textit{signal} si dichiara all'interno dell'\textit{architecture}, prima del \textit{begin}}
+  \item \textbf{Il \textit{signal} si dichiara all'interno dell'\textit{architecture}, prima del \textit{begin}}
 \end{itemize}
 
 \subsection{Component}
 \begin{itemize}
-	\item Per utilizzare i moduli all'interno del design, questi devono essere prima \textit{dichiarati} e poi \textit{istanziati}
-	\begin{itemize}
-	\item La \textit{dichiarazione} deve avvenire all'interno dell'\textit{architecture}
-	\item L'\textit{istanziamento} deve avvenire dopo il \textit{begin}
-\end{itemize}
-\item Struttura di una \textit{dichiarazione} :
-\begin{verbatim}
+  \item Per utilizzare i moduli all'interno del design, questi devono essere prima \textit{dichiarati} e poi \textit{istanziati}
+        \begin{itemize}
+          \item La \textit{dichiarazione} deve avvenire all'interno dell'\textit{architecture}
+          \item L'\textit{istanziamento} deve avvenire dopo il \textit{begin}
+        \end{itemize}
+  \item Struttura di una \textit{dichiarazione} :
+        \begin{verbatim}
     component ENTITY NAME is
     port (
         PORT_NAME : PORT_MODE PORT_TYPE;
@@ -430,19 +433,19 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
         );
     end component;
 \end{verbatim}
-	\item \textbf{Non ci vuole il \textit{punto e virgola} nella dichiarazione dell'ultima porta}
-	\item La struttura delle porte del \textit{componente dichiarato} deve essere identica a quella \textit{dell'entity originale.}
-\item Struttura di un \textit{istanziamento}:
-\begin{verbatim}
+  \item \textbf{Non ci vuole il \textit{punto e virgola} nella dichiarazione dell'ultima porta}
+  \item La struttura delle porte del \textit{componente dichiarato} deve essere identica a quella \textit{dell'entity originale.}
+  \item Struttura di un \textit{istanziamento}:
+        \begin{verbatim}
     INSTANTIATION_NAME : INSTANTIATED_NAME
     port map (
         PORT_NAME => SIGNAL,
         ...
     );
 \end{verbatim}
-\item \textbf{Non ci vuole la \textit{virgola} nel map dell'ultima porta}
-\item Esempio di una \textit{dichiarazione}:
-\begin{verbatim}
+  \item \textbf{Non ci vuole la \textit{virgola} nel map dell'ultima porta}
+  \item Esempio di una \textit{dichiarazione}:
+        \begin{verbatim}
     component or2 is
     port (
         a : in std_logic;
@@ -451,8 +454,8 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
     );
     end component;
 \end{verbatim}
-\item Esempio di un \textit{istanziamento}:
-\begin{verbatim}
+  \item Esempio di un \textit{istanziamento}:
+        \begin{verbatim}
     or2_inst1 : or2
     port map (
         a => a1,
@@ -464,21 +467,21 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{Generic}
 \begin{itemize}
-	\item I \textit{generic} servono a passare informazioni all'\textit{entity}
-	\item Non possono essere modificati durante l'esecuzione
-	\item Specificano parametri, ad esempio larghezza di vettori
-	\item Si usano per rendere scalabile un sistema
-	\item Possono essere considerate come \textit{costanti}
-	\item Struttura di un \textit{generic}
-	      \begin{verbatim}
-    Generic(
+  \item I \textit{generic} servono a passare informazioni all'\textit{entity}
+  \item Non possono essere modificati durante l'esecuzione
+  \item Specificano parametri, ad esempio larghezza di vettori
+  \item Si usano per rendere scalabile un sistema
+  \item Possono essere considerate come \textit{costanti}
+  \item Struttura di un \textit{generic}
+        \begin{verbatim}
+    Generic (
         GENRIC_NAME_1 : GENERIC_TYPE := INITIAL_VALUE;
         ...
         GENRIC_NAME_2 : GENERIC_TYPE := INITIAL_VALUE
     );
 	      \end{verbatim}
-	\item Esempio di un \textit{generic}
-	      \begin{verbatim}
+  \item Esempio di un \textit{generic}
+        \begin{verbatim}
     entity my_entity is
     Generic (
         VECTOR_WIDTH : integer := 16;
@@ -490,28 +493,28 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
     );
     end my_entity;
 	      \end{verbatim}
-	\item \textbf{Vanno usati nella \textit{entity} prima della funzione \textit{port}}
+  \item \textbf{Vanno usati nella \textit{entity} prima della funzione \textit{port}}
 \end{itemize}
 
 \subsection{Attributes} \label{attributes}
 \begin{itemize}
-	\item Permettono di ricavare informazioni su oggetti del nostro sistema
-	\item \textit{Attributes} più usati:
-	      \begin{itemize}
-	      	\item LEFT/RIGHT
-	      	\item HIGH/LOW
-	      	\item LENGTH
-	      	\item RANGE/REVERSE\_RANGE
-	      \end{itemize}
-	      
-\newpage
+  \item Permettono di ricavare informazioni su oggetti del nostro sistema
+  \item \textit{Attributes} più usati:
+        \begin{itemize}
+          \item \texttt{LEFT/RIGHT}
+          \item \texttt{HIGH/LOW}
+          \item \texttt{LENGTH}
+          \item \texttt{RANGE/REVERSE\_RANGE}
+        \end{itemize}
 
-	\item Struttura di un \textit{attribute}
-	      \begin{verbatim}
+        \newpage
+
+  \item Struttura di un \textit{attribute}
+        \begin{verbatim}
     object'attribute_name
 	      \end{verbatim}
-	\item Esempi di \textit{attribute}
-	      \begin{verbatim}
+  \item Esempi di \textit{attribute}
+        \begin{verbatim}
     signal vect : std_logic_vector(4 to 16);
     vect'LEFT => 4
     vect'RIGHT => 4
@@ -528,14 +531,14 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{Aggregate} \label{aggregates}
 \begin{itemize}
-	\item Definisce un vettore tramite composizione
-	\item A differenza della concatenazione, la lunghezza del vettore non è definita a priori
+  \item Definisce un vettore tramite composizione
+  \item A differenza della concatenazione, la lunghezza del vettore non è definita a priori
 
-	\item Esempi di \textit{aggregate}
-	      \begin{verbatim}
+  \item Esempi di \textit{aggregate}
+        \begin{verbatim}
     signal vect_1 : std_logic_vector(7 downto 0);
     signal vect_2 : std_logic_vector(7 downto 0);
-        
+
     vect1 <= (7 => '0', 6 => vect2(3), 3|4|2 => '1', Others => '0');
     vect1 <= (vect2(3 downto 0), vect2(7 downto 4));
     vect1 <= (Others => '0');
@@ -545,26 +548,26 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{When/Else}
 \begin{itemize}
-	\item Assegna il valore ad un \textit{signal} condizionatamente ad un altro \textit{signal,} \textbf{ma solo al di fuori di un process}
-	\item Tutte le possibili condizioni vanno esplicitate, usando la \textit{keyword else}
-	\item Non bisogna usare le virgole dopo gli else
-	\item Struttura di un \textit{when/else}
-	      \begin{verbatim}
+  \item Assegna il valore ad un \textit{signal} condizionatamente ad un altro \textit{signal,} \textbf{ma solo al di fuori di un process}
+  \item Tutte le possibili condizioni vanno esplicitate, usando la \textit{keyword else}
+  \item Non bisogna usare le virgole dopo gli else
+  \item Struttura di un \textit{when/else}
+        \begin{verbatim}
     SIGNAL_1 <= VALUE when SIGNAL_2 = VALUE else
                 ...
                 else VALUE;
 	      \end{verbatim}
-	      
-\newpage	      
-	      
-	\item Esempio di \textit{when/else}
-	      \begin{verbatim}
+
+        \newpage
+
+  \item Esempio di \textit{when/else}
+        \begin{verbatim}
     a, b signals
     b <= "1000" when a = "00" else
          "0100" when a = "01" else
          "0010" when a = "10" else
          "0001" when a = "11";
-             
+
     b <= "1000" when a = "00" else
          "0100" when a = "01" else
          "0000";
@@ -573,22 +576,22 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{With/Select}
 \begin{itemize}
-	\item Assegna il valore ad un \textit{signal} condizionatamente ad un altro \textit{signal, } \textbf{ma solo al di fuori di un process}
-	\item Tutte le possibili condizioni vanno esplicitate, usando la \textit{keyword else}
-	\item Servono le virgole a fine riga
-	\item Struttura di un \textit{with/select}
-	\begin{verbatim}
+  \item Assegna il valore ad un \textit{signal} condizionatamente ad un altro \textit{signal, } \textbf{ma solo al di fuori di un process}
+  \item Tutte le possibili condizioni vanno esplicitate, usando la \textit{keyword else}
+  \item Servono le virgole a fine riga
+  \item Struttura di un \textit{with/select}
+        \begin{verbatim}
     with SIGNAL_1 select SIGNAL_2 <= VALUE when VALUE;
                                          ...
 	      \end{verbatim}
-	\item Esempio di \textit{with/select}
-	      \begin{verbatim}
+  \item Esempio di \textit{with/select}
+        \begin{verbatim}
     a, b signals
     with a select b <= "1000" when "00";
                        "0100" when "01";
                        "0010" when "10";
                        "0001" when "11";
-      
+
     with a select b <= "1000" when "00";
                        "0100" when "01";
                        "0000" when Others;
@@ -596,33 +599,33 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 \end{itemize}
 
 
- \newpage
+\newpage
 
 \section{Generate statement}
 \begin{itemize}
-	\item Servono ad istanziare un numero di componenti non definito staticamente
-	\item Il numero di \textit{component} istanziati può essere in funzione dei \textit{generic} 
-	\item I \textit{generate statements} possono essere annidati
-	\item \textbf{Vanno usati dentro l'\textit{architecture}, dopo il  \textit{begin}}
+  \item Servono ad istanziare un numero di componenti non definito staticamente
+  \item Il numero di \textit{component} istanziati può essere in funzione dei \textit{generic}
+  \item I \textit{generate statements} possono essere annidati
+  \item \textbf{Vanno usati dentro l'\textit{architecture}, dopo il  \textit{begin}}
 \end{itemize}
 \subsection{If ... Generate}
 \begin{itemize}
-	\item Tramite il costrutto \textit{If ... Generate} è possibile includere determinate dichiarazioni in funzione del valore assunto da \textit{generic} o \textit{costanti}
-	\item Il costrutto \textit{If ... Generate} non ha il costrutto \textit{else}
-	\item Struttura di un \textit{If ... Generate}
-	\begin{verbatim}
+  \item Tramite il costrutto \textit{If ... Generate} è possibile includere determinate dichiarazioni in funzione del valore assunto da \textit{generic} o \textit{costanti}
+  \item Il costrutto \textit{If ... Generate} non ha il costrutto \textit{else}
+  \item Struttura di un \textit{If ... Generate}
+        \begin{verbatim}
     	LABEL : if GENERIC == VALUE generate
         	STATEMENT
     	end generate;
     \end{verbatim}
-	\item Esempio di un \textit{If ... Generate}
-	      \begin{verbatim}
+  \item Esempio di un \textit{If ... Generate}
+        \begin{verbatim}
 	    architecture Behavioral of test is
         begin
             NULL_GEN : if NULL_VALUE = true generate
                 c <= (Others => '0');
             end generate;
-        
+
             NO_NULL_GEN : if NULL_VALUE = false generate
                 c <= a;
             end generate;
@@ -632,24 +635,24 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{For ... Generate}
 \begin{itemize}
-	\item Tramite il costrutto \textit{For ... Generate} è possibile includere determinate dichiarazioni ricorsivamente, come in un ciclo \textit{for}
-	\item Struttura di un \textit{For ... Generate}
-	      \begin{verbatim}
+  \item Tramite il costrutto \textit{For ... Generate} è possibile includere determinate dichiarazioni ricorsivamente, come in un ciclo \textit{for}
+  \item Struttura di un \textit{For ... Generate}
+        \begin{verbatim}
     LABEL : for VARIABLE in RANGE generate
         STATEMENT
     end generate;
 	      \end{verbatim}
-	      
-\newpage
-	      
-	\item Esempio di un \textit{For ... Generate}
-	      \begin{verbatim}
+
+        \newpage
+
+  \item Esempio di un \textit{For ... Generate}
+        \begin{verbatim}
     architecture Behavioral of test is
     begin
         LOOP_GEN_1 : for I in 0 to 3 generate
             c(I) <= a(0);
         end generate;
-        
+
         LOOP_GEN_2 : for I in 4 to 7 generate
             c(I) <= a(1);
         end generate;
@@ -661,17 +664,17 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \section{Process}
 \begin{itemize}
-	\item Il \textit{process} in VHDL è una struttura particolare usata per descrivere il comportamento di un aparte di circuito
-	\item \textbf{Il comportamento è diverso da un linguaggio di programmazione classico}
-	\item Durante la simulazione, un \textit{process} viene letto ed eseguito sequenzialmente dal simulatore
-	\item \textbf{I \textit{process} vanno messi all'iterno del \textit{begin}}
-	\item Differenza tra \textit{sintesi} e \textit{simulazione}
-	      \begin{itemize}
-	      	\item Sintesi: \textit{il process viene sintetizzato per ottenere un Hardware con le stesse proprietà}
-	      	\item Simulazione: \textit{il process viene letto da una macchina temporale che valuta riga per riga}
-	      \end{itemize}
-	\item Struttura di un \textit{process}
-	      \begin{verbatim}
+  \item Il \textit{process} in VHDL è una struttura particolare usata per descrivere il comportamento di un a parte di circuito
+  \item \textbf{Il comportamento è diverso da un linguaggio di programmazione classico}
+  \item Durante la simulazione, un \textit{process} viene letto ed eseguito sequenzialmente dal simulatore
+  \item \textbf{I \textit{process} vanno messi all'interno del \textit{begin}}
+  \item Differenza tra \textit{sintesi} e \textit{simulazione}
+        \begin{itemize}
+          \item Sintesi: \textit{il process viene sintetizzato per ottenere un Hardware con le stesse proprietà}
+          \item Simulazione: \textit{il process viene letto da una macchina temporale che valuta riga per riga}
+        \end{itemize}
+  \item Struttura di un \textit{process}
+        \begin{verbatim}
     PROCESS_NAME process (SENSITIVITY_LIST)
         TYPE_DECLARATIONS
         CONSTANT_DECLARATIONS
@@ -685,46 +688,46 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 \subsection{Struttura di un process}
 \subsubsection{Infinite loop}
 \begin{itemize}
-	\item In un \textit{process} il codice viene letto sequenzialmente.
-	\item Quando il \textit{process} raggiunge l'ultima riga, riparte dall'inizio
-	\item \textbf{Senza nessun tipo di interruzione si crea un \textit{infinite loop process}}
-	\begin{itemize}
-		\item \textbf{\`E normalmente un comportamento non voluto}
-	\end{itemize}
+  \item In un \textit{process} il codice viene letto sequenzialmente.
+  \item Quando il \textit{process} raggiunge l'ultima riga, riparte dall'inizio
+  \item \textbf{Senza nessun tipo di interruzione si crea un \textit{infinite loop process}}
+        \begin{itemize}
+          \item \textbf{\`E normalmente un comportamento non voluto}
+        \end{itemize}
 \end{itemize}
 \subsubsection{Wait statement}
 \begin{itemize}
-	\item Il \textit{wait statement} temporizza il circuito, fermandone l'esecuzione in determinate condizioni
-	\item Struttura di un \textit{wait statement}
-	      \begin{verbatim}
+  \item Il \textit{wait statement} temporizza il circuito, fermandone l'esecuzione in determinate condizioni
+  \item Struttura di un \textit{wait statement}
+        \begin{verbatim}
     LABEL wait SENSITIVITY_CLAUSE CONDITION_CLAUSE;
 	      \end{verbatim}
-	      
-\newpage	      
-	      
-	\item Esempio di un \textit{wait statement}
-	      \begin{verbatim}
+
+        \newpage
+
+  \item Esempio di un \textit{wait statement}
+        \begin{verbatim}
     wait for 10 ns;              -- Specifica un tempo di timeout
     wait until clk='1';          -- Condizione booleana
     wait until A>B and S1 or S2; -- Condizione booleana
     wait on sig1, sig2;          -- Sensitivity clause, qualsiasi cambio
                                  -- in uno dei segnali ferma la pausa
-    wait;                        -- Pausa per semprea
-	      \end{verbatim} 
+    wait;                        -- Pausa per sempre
+	      \end{verbatim}
 \end{itemize}
 \subsubsection{Sensitivity list}
 \begin{itemize}
-	\item La \textit{sensitivity list}, insieme agli \textit{wait statements}, serve a controllare il flusso del programma
-	\item Funge da \textit{lista di attivazione} del processo, poiché questo rimane dormiente finché un segnale non lo risveglia cambiando di valore
-	\item Nella \textit{sensitivity list} vanno aggiunti tutti i segnali presenti nella parte destra delle assegnazioni dei vari costrutti condizionali
+  \item La \textit{sensitivity list}, insieme agli \textit{wait statements}, serve a controllare il flusso del programma
+  \item Funge da \textit{lista di attivazione} del processo, poiché questo rimane dormiente finché un segnale non lo risveglia cambiando di valore
+  \item Nella \textit{sensitivity list} vanno aggiunti tutti i segnali presenti nella parte destra delle assegnazioni dei vari costrutti condizionali
 \end{itemize}
 \subsubsection{Declaration region}
 \begin{itemize}
-	\item All'interno di un \textit{process} sono visibili tutte le dichiarazioni presenti nella \textit{entity} e \textit{architecture}, come \textit{signals} e \textit{begin}
-	\item La \textit{declaration region} è nell'area compresa tra \textit{process} e \textit{begin}
-	\item Dentro la \textit{declaration region} è possibile dichiarare nuove risorse (le \textit{variabili}). Non esistono \textit{signals} locali
-	\item Esempio di \textit{declaration region}
-	      \begin{verbatim}
+  \item All'interno di un \textit{process} sono visibili tutte le dichiarazioni presenti nella \textit{entity} e \textit{architecture}, come \textit{signals} e \textit{begin}
+  \item La \textit{declaration region} è nell'area compresa tra \textit{process} e \textit{begin}
+  \item Dentro la \textit{declaration region} è possibile dichiarare nuove risorse (le \textit{variabili}). Non esistono \textit{signals} locali
+  \item Esempio di \textit{declaration region}
+        \begin{verbatim}
 	    process(clk, reset)
 	        variable local_count : count'base
 	    begin
@@ -734,13 +737,13 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 \end{itemize}
 \subsubsection{Sequential Statement Region}
 \begin{itemize}
-	\item Nella regione di \textit{sequential statement} viene inserita tutta la descrizione del comportamento del \textit{process}
-	\item La lettura del codice avviene in maniera \textit{sequenziale}
-	
-	\newpage
-	
-	\item Esempio di \textit{sequential statement region}
-		\begin{verbatim}
+  \item Nella regione di \textit{sequential statement} viene inserita tutta la descrizione del comportamento del \textit{process}
+  \item La lettura del codice avviene in maniera \textit{sequenziale}
+
+        \newpage
+
+  \item Esempio di \textit{sequential statement region}
+        \begin{verbatim}
     process (...)
         ...
     begin
@@ -756,27 +759,27 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 \end{itemize}
 \subsection{Sequential statements}
 \begin{itemize}
-	\item Questi \textit{statements} sono usati nei \textit{process}
-	\item Lista di \textit{statements}
-	      \begin{itemize}
-	      	\item wait statement
-	      	\item assertion statement
-	      	\item report statement
-	      	\item signal assignment statement
-	      	\item procedure call statement
-	      	\item if statement
-	      	\item case statement
-	      	\item loop statement
-	      	\item next statement
-	      	\item exit statement
-	      	\item return statement
-	      	\item null statement
-	      \end{itemize}
+  \item Questi \textit{statements} sono usati nei \textit{process}
+  \item Lista di \textit{statements}
+        \begin{itemize}
+          \item \texttt{wait statement}
+          \item \texttt{assertion statement}
+          \item \texttt{report statement}
+          \item \texttt{signal assignment statement}
+          \item \texttt{procedure call statement}
+          \item \texttt{if statement}
+          \item \texttt{case statement}
+          \item \texttt{loop statement}
+          \item \texttt{next statement}
+          \item \texttt{exit statement}
+          \item \texttt{return statement}
+          \item \texttt{null statement}
+        \end{itemize}
 \end{itemize}
 \subsubsection{If statement}
 \begin{itemize}
-	\item Struttura dell'\textit{if statement}
-	      \begin{verbatim}
+  \item Struttura dell'\textit{if statement}
+        \begin{verbatim}
     LABEL if CONDITION1 then
         ...
     elsif CONDITION2 then
@@ -785,8 +788,8 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
         ...
     end if LABEL;
 	      \end{verbatim}
-	\item Esempio di \textit{if statement}
-	      \begin{verbatim}
+  \item Esempio di \textit{if statement}
+        \begin{verbatim}
     if a=b then
         c := a;
     elsif b<c then
@@ -799,9 +802,9 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 \end{itemize}
 \subsubsection{Case statement}
 \begin{itemize}
-	\item \'E necessario specificare \textbf{sempre} il caso \textit{Others}
-	\item Struttura dell'\textit{Case statement}
-	      \begin{verbatim}
+  \item \'E necessario specificare \textbf{sempre} il caso \textit{Others}
+  \item Struttura dell'\textit{Case statement}
+        \begin{verbatim}
     LABEL case EXPRESSION is
         when choice1 =>
             ...
@@ -811,8 +814,8 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
             ...
     end case LABEL
 	      \end{verbatim}
-	\item Esempio di \textit{case statement}
-	      \begin{verbatim}
+  \item Esempio di \textit{case statement}
+        \begin{verbatim}
     case my_val is
         when 1 =>
             a:=b;
@@ -824,35 +827,35 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 	      \end{verbatim}
 \end{itemize}
 
-\newpage 
+\newpage
 
 \subsubsection{Loop statement}
 \begin{itemize}
-	\item Struttura dell'\textit{Loop statement}
-	      \begin{verbatim}
+  \item Struttura dell'\textit{Loop statement}
+        \begin{verbatim}
     LABEL loop
         ... --use exit statement to get out
     end loop LABEL;
-    
+
     LABEL for VARIABLE in RANGE loop
         ...
     end loop LABEL;
-    
+
     LABEL while CONDITION loop
         ...
     end loop LABEL;
 	      \end{verbatim}
-	\item Esempio di \textit{loop statement}
-	      \begin{verbatim}
+  \item Esempio di \textit{loop statement}
+        \begin{verbatim}
     loop
         input_something;
         exit when end_file;
     end loop;
-    
+
     for I in 1 to 10 loop
         AA(I) := 0;
     end loop;
-    
+
     while not end_file loop
         input_something;
     end loop;
@@ -861,63 +864,63 @@ Il linguaggio VHDL contiene diversi tipi di dato che possono caratterizzare \tex
 
 \subsection{Commit}
 \begin{itemize}
-	\item Il \textit{commit} indica quando il valore delli \textit{signals} e delle \textit{variables} vengono aggiornati nel sistema
+  \item Il \textit{commit} indica quando il valore dei \textit{signals} e delle \textit{variables} vengono aggiornati nel sistema
 \end{itemize}
 \subsubsection{Signal commit}
 Nei \textit{process} i segnali hanno un comportamento particolare
 \begin{itemize}
-	\item Il valore dei segnali rimane invariato tra due \textit{wait statement}
-	\item Il valore scritto nei segnali viene aggiornato solo quanto il flusso raggiunge uno \textit{wait statement}
+  \item Il valore dei segnali rimane invariato tra due \textit{wait statement}
+  \item Il valore scritto nei segnali viene aggiornato solo quanto il flusso raggiunge uno \textit{wait statement}
 \end{itemize}
 \subsubsection{Variable commit}
 \begin{itemize}
-	\item Le \textit{variables} hanno visibilità ristretta nel \textit{process} che le ha dichiarate
-	\item Le \textit{variables} vengono aggiornate istantaneamente
-	\item L'assegnazione delle \textit{variables} avviene con \(=:\)
+  \item Le \textit{variables} hanno visibilità ristretta nel \textit{process} che le ha dichiarate
+  \item Le \textit{variables} vengono aggiornate istantaneamente
+  \item L'assegnazione delle \textit{variables} avviene con \(=:\)
 \end{itemize}
 
 \newpage
 
 \section{Custom types}
 \begin{itemize}
-	\item Nel VHDL sono disponibili molti tipi di dato base. Per creare nuovi tipi di dato personalizzati si usano le seguenti keywords
-	      \begin{itemize}
-	      	\item Type \textit{tipi}
-	      	\item Subtype \textit{sottotipi}
-	      \end{itemize}
-	\item \textbf{Si usano nell'architecture prima del \textit{begin}}
+  \item Nel VHDL sono disponibili molti tipi di dato base. Per creare nuovi tipi di dato personalizzati si usano le seguenti keywords
+        \begin{itemize}
+          \item Type \textit{tipi}
+          \item Subtype \textit{sottotipi}
+        \end{itemize}
+  \item \textbf{Si usano nell'architecture prima del \textit{begin}}
 \end{itemize}
 \subsection{Sottotipi}
 \begin{itemize}
-	\item Un \textit{subtype} è un sottoinsieme di un tipo già esistente \textit{(per esempio, integer o std\_logic\_vector)}
-	\item I nuovi tipi creati possono essere assegnati anche al tipo originale
-	\item Struttura di un \textit{subtype}
-	      \begin{verbatim}
+  \item Un \textit{subtype} è un sottoinsieme di un tipo già esistente \textit{(per esempio, integer o std\_logic\_vector)}
+  \item I nuovi tipi creati possono essere assegnati anche al tipo originale
+  \item Struttura di un \textit{subtype}
+        \begin{verbatim}
 	    subtype SUBTYPE_NAME TYPE STATEMENTS;
 	      \end{verbatim}
-	\item Esempi di \textit{subtypes}
-	      \begin{verbatim}
+  \item Esempi di \textit{subtypes}
+        \begin{verbatim}
 	    subtype short integer range 0 to 255;
-		
+
 	    subtype nib is std_logic_vector(3 downto 0);
 	    subtype byte is std_logic_vector(7 downto 0);
-		
+
 	    signal myByte : byte;
 	    signal myVect : std_logic_vector(7 downto 0);
-		
-	    myVect <= mybyte;
+
+	    myVect <= myByte;
 	      \end{verbatim}
 \end{itemize}
 \subsection{Tipi}
 \subsubsection{Tipi enumerati}
 \begin{itemize}
-	\item \textit{Tipi} di dato che rappresentano un set finito di stati diversi
-	\item Struttura di un \textit{tipo enumerato}
-	      \begin{verbatim}
+  \item \textit{Tipi} di dato che rappresentano un set finito di stati diversi
+  \item Struttura di un \textit{tipo enumerato}
+        \begin{verbatim}
 	    type TYPE_NAME is (ELEMENT, ELEMENT, ...);
 	      \end{verbatim}
-	\item Esempi di \textit{tipi enumerati}
-	      \begin{verbatim}
+  \item Esempi di \textit{tipi enumerati}
+        \begin{verbatim}
 	    type MyBit_type is (L, H);
 	    type MyState_type is (init, waiting, working, done);
 	      \end{verbatim}
@@ -925,16 +928,16 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 
 \subsubsection{Tipi record}
 \begin{itemize}
-	\item \textit{Tipi} di dato composto da diversi sotto oggetti
-	\item Struttura di un \textit{tipo record}
-	      \begin{verbatim}
+  \item \textit{Tipi} di dato composto da diversi sotto oggetti
+  \item Struttura di un \textit{tipo record}
+        \begin{verbatim}
 	    type TYPE_NAME is record
 		    ELEMENT_NAME : element type;
 		    ...
 	    end record TYPE_NAME;
 	      \end{verbatim}
-	\item Esempi di \textit{tipi record}
-	      \begin{verbatim}
+  \item Esempi di \textit{tipi record}
+        \begin{verbatim}
 	    type Operation is record
 		    OpCode : Bit_Vector(3 downto 0);
 		    Op1, Op2, Res : RegName;
@@ -944,13 +947,13 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 
 \subsubsection{Tipi array}
 \begin{itemize}
-	\item \textit{Tipi} di dato composto da multipli elementi dello stesso tipo
-	\item Struttura di un \textit{tipo array}
-	      \begin{verbatim}
+  \item \textit{Tipi} di dato composto da multipli elementi dello stesso tipo
+  \item Struttura di un \textit{tipo array}
+        \begin{verbatim}
 	    type TYPE_NAME is array (RANGE) of ELEMENT_TYPE;
 	      \end{verbatim}
-	\item Esempi di \textit{tipi record}
-	      \begin{verbatim}
+  \item Esempi di \textit{tipi record}
+        \begin{verbatim}
 	    type nibble is array (3 downto 0) of std_ulogic;
 	    type RAM is array (0 to 31) of integer range 0 to 255;
 	      \end{verbatim}
@@ -958,14 +961,14 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 
 \paragraph{Array 1D}
 \begin{itemize}
-	\item \textit{Array} in cui è definito un singolo range
-	\item \`E possibile creare \textit{nested 1D array} in cui ogni eleento di ogni cella è a sua volta un array
-	\item Struttura di un \textit{array 1D}
-	\begin{verbatim}
+  \item \textit{Array} in cui è definito un singolo range
+  \item \`E possibile creare \textit{nested 1D array} in cui ogni elemento di ogni cella è a sua volta un array
+  \item Struttura di un \textit{array 1D}
+        \begin{verbatim}
 	    type TYPE_NAME is array (RANGE) of ANOTHER_TYPE;
 	\end{verbatim}
-	\item Esempi di \textit{array 1D}
-	\begin{verbatim}
+  \item Esempi di \textit{array 1D}
+        \begin{verbatim}
 	    type MyNestedArray is array (0 to 10) of std_logic_vector(7 downto 0);
 	    signal ciao : MyNestedArray := (Others => (Others => '0'));
 	    ciao(0)(0) <= '1';
@@ -975,14 +978,14 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 
 \paragraph{Array multidimensionali}
 \begin{itemize}
-	\item \textit{Array} con più indici
-	\item Utili quando la grandezza da rappresentare è a sua volta a più dimensioni \textit{(es. immagini RGB)}
-	\item Struttura di un \textit{array multidimensionale}
-	\begin{verbatim}
+  \item \textit{Array} con più indici
+  \item Utili quando la grandezza da rappresentare è a sua volta a più dimensioni \textit{(es. immagini RGB)}
+  \item Struttura di un \textit{array multidimensionale}
+        \begin{verbatim}
 	    type ARRAY_TYPE is array (RANGE, RANGE, ...) of ANOTHER TYPE
 	\end{verbatim}
-	\item Esempio di \textit{array multidimensionale}
-	\begin{verbatim}
+  \item Esempio di \textit{array multidimensionale}
+        \begin{verbatim}
 	    type RGB_Type is record
 	        r_ch : unsigned(7 downto 0);
 	        g_ch : unsigned(7 downto 0);
@@ -990,14 +993,14 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 	    end record;
 
 	    type img_type is array (0 to 15, 0 to 15) of RGB_Type;
-		
-	    signal immagine : img_type := (Others => (Others => ( 
+
+	    signal immagine : img_type := (Others => (Others => (
 		                                    r_ch => to_unsigned(100, 8),
 		                                    g_ch => to_unsigned(100, 8),
 		                                    b_ch => to_unsigned(100, 8)
 		                               )));
-		
-	    immagine(0, 0) <= ( 
+
+	    immagine(0, 0) <= (
 	                        r_ch => to_unsigned(100, 8),
 	                        g_ch => to_unsigned(100, 8),
 	                        b_ch => to_unsigned(100, 8)
@@ -1007,17 +1010,17 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 
 \paragraph{Constrained array}
 \begin{itemize}
-	\item \textit{Tipo di array} in cui è definita la dimensione in fase di definizione
-	\item Ogni segnale dichiarato con questo tipo sarà della stessa dimensione
-	\item Può essere anche un \textit{subtype}
-	\item Struttura di un \textit{constrained array}
-	\begin{verbatim}
+  \item \textit{Tipo di array} in cui è definita la dimensione in fase di definizione
+  \item Ogni segnale dichiarato con questo tipo sarà della stessa dimensione
+  \item Può essere anche un \textit{subtype}
+  \item Struttura di un \textit{constrained array}
+        \begin{verbatim}
 	    type TYPE_NAME is array (RANGE) of ANOTHER_TYPE;
 	\end{verbatim}
-	\item Esempi di \textit{constrained array}
-	\begin{verbatim}
+  \item Esempi di \textit{constrained array}
+        \begin{verbatim}
 	    type MySimpleArray is array (0 to 10) of Another_type;
-	    
+
 	    type img_type is array (0 to 15, 0 to 15) of RGB_Type;
 	    subtype byte_type is std_logic_vector(7 downto 0);
 	\end{verbatim}
@@ -1025,24 +1028,24 @@ Nei \textit{process} i segnali hanno un comportamento particolare
 
 \paragraph{Unconstrained array}
 \begin{itemize}
-	\item \textit{Tipo di array} in cui \textbf{non è} definita la dimensione in fase di definizione
-	\item Ogni segnale dichiarato con questo tipo potrà avere una dimensione diversa
-	\item Può essere anche un \textit{subtype}
-	\item Nel momento in cui si dichiara il segnale si deve specificare un \textit{range} per definirne la grandezza. Il \textit{range} può non essere un \textit{integer} ma anche un \textit{natural}
-	\begin{verbatim}
+  \item \textit{Tipo di array} in cui \textbf{non è} definita la dimensione in fase di definizione
+  \item Ogni segnale dichiarato con questo tipo potrà avere una dimensione diversa
+  \item Può essere anche un \textit{subtype}
+  \item Nel momento in cui si dichiara il segnale si deve specificare un \textit{range} per definirne la grandezza. Il \textit{range} può non essere un \textit{integer} ma anche un \textit{natural}
+        \begin{verbatim}
 	    type TYPE_NAME is array (TYPE range<>, TYPE range<>, ...) of ANOTHER_TYPE;
 	\end{verbatim}
-	\item Esempi di \textit{unconstrained array}
-	\begin{verbatim}
-	    type my1DArray_type is array (integer range <>, integer range <>) 
+  \item Esempi di \textit{unconstrained array}
+        \begin{verbatim}
+	    type my1DArray_type is array (integer range <>, integer range <>)
 	        of std_logic_vector(7 downto 0);
-	        
+
 	    signal my1DArray : my1DArray_type(1 to 3);
-		
-		
-	    type my2DArray_type is array (integer range<>, integer range<>) 
+
+
+	    type my2DArray_type is array (integer range<>, integer range<>)
     	    of std_logic_vector(7 downto 0);
-    	    
+
 	    signal my2DArray : my2DArray_type(1 to 3, 5 downto 0);
 	\end{verbatim}
 \end{itemize}
